@@ -1,26 +1,60 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Logo from "../../public/MyWallet.svg";
+import { tryCad } from "../services/axios";
 
 function SingUp() {
+	const [user, setUser] = useState({
+		name: "",
+		email: "",
+		password: "",
+	});
+
+	function singUp() {
+		// eslint-disable-next-line no-restricted-globals
+		event.preventDefault();
+		tryCad(user);
+	}
+
 	return (
 		<>
 			<StyledHome>
 				<StyledLogo className="logo">
 					<Logo />
 				</StyledLogo>
-				<StyledForm>
-					<input type="text" placeholder="Nome" />
-					<input type="email" placeholder=" E-mail" />
-					<input type="password" placeholder=" Senha" />
-					<input type="password" placeholder=" Confirme a senha" />
+				<StyledForm onSubmit={singUp}>
+					<input
+						type="text"
+						placeholder="Nome"
+						value={user.name}
+						onChange={(e) => setUser(e.target.value)}
+					/>
+					<input
+						type="email"
+						placeholder=" E-mail"
+						value={user.email}
+						onChange={(e) => setUser(e.target.value)}
+					/>
+					<input
+						type="password"
+						placeholder=" Senha"
+						value={user.password}
+						onChange={(e) => setUser(e.target.value)}
+					/>
+					<input
+						type="password"
+						placeholder=" Confirme a senha"
+						value={user.password}
+						onChange={(e) => setUser(e.target.value)}
+					/>
 
-					<button type="submit" onClick={""}>
+					<button type="submit" >
 						Cadastrar
 					</button>
 				</StyledForm>
 				<StyledLink>
-					<Link to="/register">Já tem uma conta? Entre agora!</Link>
+					<Link to="/sing-in">Já tem uma conta? Entre agora!</Link>
 				</StyledLink>
 			</StyledHome>
 		</>
@@ -44,7 +78,7 @@ const StyledLogo = styled.div`
 	width: 147px;
 	height: 50px;
 	color: white;
-  margin-bottom: 30px;
+	margin-bottom: 30px;
 `;
 
 const StyledForm = styled.form`

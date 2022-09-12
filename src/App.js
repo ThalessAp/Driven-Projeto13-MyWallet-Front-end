@@ -9,13 +9,14 @@ import GlobalStyles from "./GlobalStyle.js";
 
 function App() {
 	return (
+		
 		<>
 			<GlobalStyles>
 				<BrowserRouter>
 					<Routes>
 						<Route path="/" element={Home} />
-						<Route path="/login" component={Login} />
-						<Route path="/register" component={SingUp} />
+						<Route path="/sing-in" component={Login} />
+						<Route path="/sing-up" component={SingUp} />
 						<Route path="/entry" component={NewEntry} />
 					</Routes>
 				</BrowserRouter>

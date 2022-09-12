@@ -1,25 +1,33 @@
 import axios from "axios";
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-
-  
-  const [token, setToken] = useState("");
-  
-  async function tryLogin(user) {
-    axios
-		.post("localhost/3000", user)
+const API = "mongodb://127.0.0.1:27017";
+let token = "";
+const navigate = useNavigate;
+async function tryLogin(user) {
+	axios
+		.post(`${API}/sing-in`, user)
 		.then((response) => {
-      setToken(response.data.token);
+			token = response.data.token;
 			return token;
 		})
 		.catch((err) => {
-      console.error(err);
+			console.error(err);
 		});
-  }
+}
 
 async function tryCad(user) {
-    
-  }
+	axios
+		.post(`${API}/sing-up`, user)
+		.then(navigate("/sing-in"))
+		.catch((err) => {
+			console.error(err);
+		});
+}
+async function getUserTransactions(user) {
+  axios.get(`${API}`, user).then(
 
-    
-export { tryLogin };
+  )
+}
+
+export { token, tryLogin, tryCad, getUserTransactions };
